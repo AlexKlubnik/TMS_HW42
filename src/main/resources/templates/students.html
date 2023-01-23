@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+</head>
+<body>
+<br>
+<div th:each="current:${studentsList}">
+    <h2 th:text="${current.studentName}"></h2>
+    <span><a th:href="@{/students/student(id=${current.id})}" th:inline="text">Show student info</a></span>
+</div>
+<br>
+<a th:href="@{/students/studentform}" th:inline="text">Add some more students to our class</a>
+</body>
+</html>

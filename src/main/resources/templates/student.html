@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student information</title>
+</head>
+<body>
+<br>
+<div th:object="${studentFromDB}">
+    <h2 th:inline="text"> Student id is: [[*{id}]] </h2>
+    <h2 th:inline="text"> Student name is: [[*{studentName}]]</h2>
+    <h2 th:inline="text"> Student age is: [[*{age}]]</h2>
+  <a th:href="@{/students/delete(id=*{id})}" th:inline="text">Delete student</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student form</title>
+</head>
+<body>
+<br>
+<form th:action="@{/students/studentform}" method="post" th:object="${student}">
+    <input type="text" th:field="*{studentName}"/>
+    <span th:if="${#fields.hasErrors('studentName')}" th:errors="*{studentName}"></span>
+    <input type="text" th:field="*{age}"/>
+    <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+    <input type="submit" value="Add student">
+</form>
+</body>
+</html>
