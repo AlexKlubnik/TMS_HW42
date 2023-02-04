@@ -8,7 +8,7 @@
 <br>
 <div th:each="current:${studentsList}">
     <h2 th:text="${current.studentName}"></h2>
-    <span><a th:href="@{/students/student(id=${current.id})}" th:inline="text">Show student info</a></span>
+    <span><a th:href="@{/students/{id}(id=${current.id})}" th:inline="text">Show student info</a></span>
 </div>
 <br>
 <a th:href="@{/students/studentform}" th:inline="text">Add some more students to our class</a>

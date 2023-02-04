@@ -1,6 +1,5 @@
 package by.klubnikov.hw4243.controller;
 
-import by.klubnikov.hw4243.config.AppEvent;
 import by.klubnikov.hw4243.entity.Student;
 import by.klubnikov.hw4243.service.StudentService;
 import jakarta.validation.Valid;
@@ -9,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,22 +22,22 @@ public class StudentController {
     private final StudentService service;
 
     @GetMapping
-    public String getAllStudents(Model model) {
+    public String findAll(Model model) {
         List<Student> studentsList = service.findAll();
         model.addAttribute("studentsList", studentsList);
         return "students";
     }
 
     @GetMapping("delete")
-    public String deleteStudent(
+    public String delete(
             @RequestParam(value = "id") Integer id) {
         System.out.println("this is id: " + id);
         service.delete(id);
         return "redirect:/students";
     }
 
-    @GetMapping("student")
-    public String getStudent(Model model, @RequestParam(value = "id") Integer id) {
+    @GetMapping("{id}")
+    public String findById(Model model, @PathVariable(value = "id") Integer id) {
         Student student = service.findById(id).orElseThrow();
         model.addAttribute("studentFromDB", student);
         return "student";
@@ -50,13 +46,13 @@ public class StudentController {
     @GetMapping("studentform")
     public String showForm(Student student, Model model) {
         model.addAttribute("student", student);
-        return "studentform";
+        return "student_form";
     }
 
     @PostMapping("studentform")
-    public String createStudent(Model model, @Valid Student student, Errors errors) {
+    public String save(Model model, @Valid Student student, Errors errors) {
         if (errors.hasErrors()) {
-            return "studentform";
+            return "student_form";
         }
         service.save(student);
         return "redirect:/students";

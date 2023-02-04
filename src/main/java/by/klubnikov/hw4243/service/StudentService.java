@@ -10,27 +10,27 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class StudentService implements CrudRepository<Student, Integer> {
+public class StudentService  {
 
     private final CrudRepository<Student, Integer> repository;
 
-    @Override
+
     public Student save(Student entity) {
         repository.save(entity);
         return entity;
     }
 
-    @Override
+
     public Optional<Student> findById(Integer id) {
         return repository.findById(id);
     }
 
-    @Override
+
     public List<Student> findAll() {
         return repository.findAll();
     }
 
-    @Override
+
     public void delete(Integer id) {
         repository.delete(id);
     }
